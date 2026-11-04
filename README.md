@@ -1,102 +1,101 @@
-# Real-Time Website Log Storage and Query-Based Analysis Using Apache Cassandra
+# BigDataAnalytics
+## Real-Time Amazon Web Log Storage & Query-Based Analysis Using Apache Cassandra
 
-[![Python](https://img.shields.io/badge/Python-3.10%20%7C%203.11%20%7C%203.12%20%7C%203.13-blue.svg)](https://www.python.org/)
-[![Apache Cassandra](https://img.shields.io/badge/Apache%20Cassandra-4.1.12-117A9B.svg)](https://cassandra.apache.org/)
-[![Java](https://img.shields.io/badge/Java-OpenJDK%2011-orange.svg)](https://openjdk.org/)
-[![Streamlit](https://img.shields.io/badge/Streamlit-1.30+-FF4B4B.svg)](https://streamlit.io/)
-[![Tests](https://img.shields.io/badge/Tests-14%20Passing-brightgreen.svg)](tests/)
-
-A complete, production-grade Big Data Analytics course-end academic project. The system simulates high-velocity website access logs, preprocesses and validates records, ingests them into a distributed **Apache Cassandra 4.1.12** NoSQL database across query-driven tables, runs statistical analytical aggregations, and provides a 10-page interactive **Streamlit** dashboard.
-
----
-
-## 1. Project Introduction
-
-High-traffic websites (e.g., e-commerce platforms, streaming services, social media) generate millions of HTTP access logs every hour. Traditional relational databases (RDBMS) like MySQL or PostgreSQL struggle under sustained write loads due to ACID locking, indexing overhead, and disk I/O bottlenecks. 
-
-This project demonstrates how **Apache Cassandra**, a distributed NoSQL columnar database built on the Google Bigtable and Amazon Dynamo papers, provides:
-- **Massive write throughput** via Log-Structured Merge (LSM) Trees, CommitLogs, and Memtables.
-- **Query-driven data modeling** without expensive SQL `JOIN` operations.
-- **Linear horizontal scalability** with zero single points of failure.
-- **Sub-millisecond query performance** for time-series log analysis.
+[![Python 3.10+](https://img.shields.io/badge/Python-3.10%20%7C%203.11%20%7C%203.12%20%7C%203.13-3776AB?logo=python&logoColor=white)](https://www.python.org/)
+[![Apache Cassandra 4.1.12](https://img.shields.io/badge/Apache%20Cassandra-4.1.12-117A9B?logo=apache-cassandra&logoColor=white)](https://cassandra.apache.org/)
+[![Java OpenJDK 11](https://img.shields.io/badge/Java-OpenJDK%2011-ED8B00?logo=openjdk&logoColor=white)](https://openjdk.org/)
+[![Streamlit Dashboard](https://img.shields.io/badge/Streamlit-1.30+-FF4B4B?logo=streamlit&logoColor=white)](https://streamlit.io/)
+[![Pytest Passing](https://img.shields.io/badge/Tests-14%20Passing-brightgreen?logo=pytest&logoColor=white)](tests/)
+[![GitHub Repository](https://img.shields.io/badge/GitHub-BanothShivaKumar%2FBigDataAnalytics-181717?logo=github&logoColor=white)](https://github.com/BanothShivaKumar/BigDataAnalytics)
 
 ---
 
-## 2. Project Objectives
-
-1. **Synthetic Data Generation**: Produce realistic web traffic logs with configurable volume (5,000 to 25,000+ records) covering HTTP methods, URLs, status codes, user agents, and normal vs. slow response times.
-2. **Data Preprocessing & Validation**: Clean incoming data, drop duplicate UUIDs, validate IPv4 formats, check HTTP status codes (100–599), and filter negative latencies.
-3. **NoSQL Database Management**: Automatically provision keyspace `web_analytics` and 5 specialized Cassandra tables using prepared statements and atomic counters.
-4. **Query-Based Analytics**: Calculate key performance indicators (KPIs) including total traffic, unique visitors, P50/P95 latencies, error distributions (4xx/5xx), and slow request bottlenecks (≥ 500ms).
-5. **Interactive 10-Page Dashboard**: Build a modern, responsive Streamlit dashboard suitable for live demonstrations and academic evaluations.
-6. **Automated Unit & Integration Testing**: Ensure 100% test coverage for log generation, data cleaning, statistical math, and Cassandra connectivity.
-
----
-
-## 3. Technology Stack
-
-| Component | Technology | Version | Purpose |
-| :--- | :--- | :--- | :--- |
-| **Database** | Apache Cassandra | 4.1.12 | Distributed NoSQL storage for time-series logs |
-| **Runtime / JVM** | OpenJDK | 11 | Required runtime for Apache Cassandra 4.1 |
-| **Language** | Python | 3.10 – 3.13 | Backend logic, ETL pipeline, and analytics |
-| **Driver** | DataStax Cassandra Driver | 3.29+ / 3.30+ | Binary protocol CQL connection to port 9042 |
-| **Data Processing** | Pandas & NumPy | 2.1+ / 1.26+ | In-memory dataframes and percentile calculations |
-| **Visualization** | Matplotlib & Seaborn | 3.8+ / 0.13+ | Statistical histograms and latency distributions |
-| **User Interface** | Streamlit | 1.30+ | 10-page interactive analytical web dashboard |
-| **Testing** | Pytest | 7.4+ | Automated unit and integration test suite |
+### 👨‍💻 Project Information
+- **Student / Developer**: Shiva Kumar Banoth ([@BanothShivaKumar](https://github.com/BanothShivaKumar))
+- **Course**: Big Data Analytics (Final Course-End Practical Project)
+- **Host Operating System**: Windows 11
+- **Database Subsystem**: Ubuntu 24.04 LTS (WSL2)
+- **Primary Database**: Apache Cassandra 4.1.12 (Port 9042)
+- **Web Interface**: Interactive Streamlit Web Application (Port 8501)
 
 ---
 
-## 4. System Architecture & Data Flow
+## 📌 Executive Summary
+
+Modern high-scale web platforms such as **Amazon**, Netflix, and Google process billions of HTTP access logs each day. Traditional Relational Database Management Systems (RDBMS) like MySQL or PostgreSQL fail to handle this workload due to disk I/O bottlenecks, table locking, and secondary index penalties.
+
+This project implements an end-to-end, production-grade **Big Data Analytics System** powered by **Apache Cassandra 4.1.12** and **Python**:
+1. **Real-World Amazon Weblog Simulation**: Simulates production e-commerce user activity across ASIN product views, shopping cart operations, checkout processing, Prime streaming, and search queries.
+2. **Robust Data Preprocessing Pipeline**: Validates IPv4 structures, eliminates duplicate UUIDs, enforces HTTP status ranges (100–599), and removes anomalous negative latencies.
+3. **Query-Driven NoSQL Modeling**: Implements 5 dedicated Apache Cassandra tables designed for zero-JOIN, sub-millisecond analytical retrieval.
+4. **Statistical Analytics Engine**: Calculates key metrics including total volume, unique visitors, P50/P95 latencies, 4xx/5xx error rates, and slow request bottlenecks (≥ 500ms).
+5. **Interactive Light-Themed Dashboard**: Features a 10-page Streamlit web interface with charts, live traffic counters, and an in-browser CQL query sandbox.
+6. **100% Automated Test Coverage**: 14 unit and integration tests verifying all modules.
+
+---
+
+## 🏛️ System Architecture & End-to-End Data Flow
 
 ```text
-+---------------------------------------------------------------------------------+
-|                               SYSTEM DATA FLOW                                  |
-+---------------------------------------------------------------------------------+
-|                                                                                 |
-|   [1. Log Generator (Module 1)]                                                 |
-|       Generates synthetic web traffic (methods, paths, latencies, IPs)          |
-|                         |                                                       |
-|                         v                                                       |
-|   [2. Data Preprocessor (Module 2)]                                             |
-|       Deduplication, UUID validation, IP format checks, status range checks     |
-|                         |                                                       |
-|                         v                                                       |
-|   [3. Apache Cassandra (Module 3 - Port 9042)]                                  |
-|       NoSQL Distributed Columnar Storage (LSM-Tree, CommitLog, SSTables)        |
-|       5 Tables: logs_by_date, logs_by_ip, logs_by_status,                       |
-|                 url_daily_counts, slow_requests_by_date                         |
-|                         |                                                       |
-|                         v                                                       |
-|   [4. Analytics Engine (Module 4)]                                              |
-|       Query-driven CQL retrieval, P95 latency percentiles, error rate math      |
-|                         |                                                       |
-|                         v                                                       |
-|   [5. Streamlit Dashboard (Module 5)]                                           |
-|       10 Interactive analytical views with charts, KPIs, and controls           |
-|                                                                                 |
-+---------------------------------------------------------------------------------+
++-----------------------------------------------------------------------------------------+
+|                    BIG DATA ANALYTICS PIPELINE ARCHITECTURE                             |
++-----------------------------------------------------------------------------------------+
+|                                                                                         |
+|   [1. Amazon Weblog Generator (Module 1)]                                               |
+|       - High-velocity realistic e-commerce logs (GET, POST, PUT, DELETE)                |
+|       - Realistic Amazon ASIN endpoints (/dp/B08N5WRWNW, /cart/add, /checkout)          |
+|       - Natural response times with injected slow bottlenecks (≥ 500ms)                 |
+|                                     │                                                   |
+|                                     ▼                                                   |
+|   [2. Data Preprocessor & Validation (Module 2)]                                        |
+|       - UUID validation & duplicate detection                                           |
+|       - IPv4 octet format validation (0-255 range check)                                |
+|       - HTTP status code range integrity (100 - 599)                                    |
+|       - Filtering of negative response latencies                                        |
+|                                     │                                                   |
+|                                     ▼                                                   |
+|   [3. Apache Cassandra 4.1.12 Storage (Module 3 - Port 9042)]                           |
+|       - Distributed Columnar Storage (CommitLog, Memtable, SSTables)                    |
+|       - Keyspace: web_analytics (SimpleStrategy, RF=1)                                  |
+|       - 5 Specialized Query-Driven Tables:                                              |
+|           • logs_by_date              (Time-series lookups by date/hour)                |
+|           • logs_by_ip                (Forensic client IP inspection)                   |
+|           • logs_by_status            (4xx / 5xx error triage)                          |
+|           • url_daily_counts          (Atomic counter hits per endpoint)                |
+|           • slow_requests_by_date     (Bottleneck tracking ordered by latency)          |
+|                                     │                                                   |
+|                                     ▼                                                   |
+|   [4. Big Data Analytics Engine (Module 4)]                                             |
+|       - Direct CQL retrieval using partition keys (No ALLOW FILTERING)                  |
+|       - Aggregations: P50 / P95 Latency Percentiles, Error Ratios, Traffic Trends       |
+|                                     │                                                   |
+|                                     ▼                                                   |
+|   [5. Interactive Streamlit Dashboard (Module 5 - Port 8501)]                           |
+|       - 10 Structured Analytical Pages                                                  |
+|       - High-contrast, clean light-themed interface                                     |
+|       - Live CQL Sandbox, interactive charts, and instant log generation                |
+|                                                                                         |
++-----------------------------------------------------------------------------------------+
 ```
 
 ---
 
-## 5. Folder Structure
+## 📂 Project Repository Structure
 
 ```text
-Real-Time-Website-Log-Analytics/
+BigDataAnalytics/
 │
 ├── cql/
-│   └── schema.cql                 # Cassandra Keyspace and 5 Table schemas
+│   └── schema.cql                 # Cassandra keyspace & 5 table DDL definitions
 │
 ├── src/
-│   ├── __init__.py                # Package initialization
-│   ├── log_generator.py           # Module 1: Synthetic log generation
-│   ├── preprocessor.py            # Module 2: Data cleaning & validation
+│   ├── __init__.py                # Package initializer
+│   ├── log_generator.py           # Module 1: Synthetic Amazon weblog generator
+│   ├── preprocessor.py            # Module 2: Data cleansing & schema validation
 │   ├── cassandra_manager.py       # Module 3: Cluster connection & prepared statements
-│   ├── analytics_engine.py        # Module 4: Statistical and analytical aggregations
-│   ├── dashboard.py               # Module 5: 10-page interactive Streamlit UI
-│   └── seed_data.py               # CLI utility to generate & seed baseline data
+│   ├── analytics_engine.py        # Module 4: Statistical aggregation & KPI calculation
+│   ├── dashboard.py               # Module 5: 10-page interactive Streamlit dashboard
+│   └── seed_data.py               # Automated database seed utility
 │
 ├── tests/
 │   ├── test_log_generator.py      # Module 1 unit tests
@@ -104,11 +103,10 @@ Real-Time-Website-Log-Analytics/
 │   └── test_analytics_engine.py   # Module 4 math & Cassandra integration tests
 │
 ├── data/
-│   ├── .gitkeep                   # Directory placeholder
-│   └── website_logs.csv           # Stored generated synthetic log CSV
+│   └── .gitkeep                   # Data directory placeholder (CSV files ignored)
 │
-├── requirements.txt               # Python package dependencies
-├── .env.example                   # Environment variable template
+├── requirements.txt               # Complete Python package dependencies
+├── .env.example                   # Environment configuration template
 ├── .gitignore                     # Git exclusion rules
 │
 ├── setup.sh                       # Linux / WSL2 automated setup script
@@ -119,160 +117,53 @@ Real-Time-Website-Log-Analytics/
 
 ---
 
-## 6. Why 5 Apache Cassandra Tables?
+## 🗄️ Query-Driven Cassandra Schema Design
 
-In Apache Cassandra, data modeling follows a **Query-Driven Design Rule**:  
-> *"Model your tables around your queries, not around your entities."*
+In Apache Cassandra, tables are designed around queries, not entities (**Query-Driven Modeling**). Because Cassandra does not support relational `JOIN` operations, data is duplicated across 5 dedicated tables to guarantee sub-millisecond retrieval:
 
-Cassandra does not support relational `JOIN` operations, and querying with `ALLOW FILTERING` triggers costly cluster-wide partition scans. To provide sub-millisecond query response times for the dashboard, 5 specialized tables are used:
-
-| Table Name | Partition Key | Clustering Columns | Analytical Purpose |
+| Table Name | Partition Key | Clustering Columns | Analytical Query Answered |
 | :--- | :--- | :--- | :--- |
-| **`logs_by_date`** | `(log_date, hour_bucket)` | `event_time DESC, log_id ASC` | Primary time-series log lookups. Partitioning by date and hour prevents partitions from exceeding Cassandra's recommended 100MB size limit. |
-| **`logs_by_ip`** | `(ip_address, log_date)` | `event_time DESC, log_id ASC` | Instant forensic lookups of all requests made by a specific IP on a given day. |
-| **`logs_by_status`** | `(log_date, status_code)` | `event_time DESC, log_id ASC` | Fast triage of specific HTTP error codes (e.g., retrieving only 500 Internal Server Errors or 404 Not Founds). |
-| **`url_daily_counts`** | `(log_date)` | `url_path, status_code` | Aggregated endpoint hits per day. Uses Cassandra's native **atomic counter columns** (`request_count counter`). |
-| **`slow_requests_by_date`** | `(log_date, hour_bucket)` | `response_time_ms DESC, event_time DESC, log_id ASC` | Stores requests exceeding the 500ms threshold. Clustering by `response_time_ms DESC` ensures the slowest requests appear at the top. |
+| **`logs_by_date`** | `(log_date, hour_bucket)` | `event_time DESC, log_id ASC` | *"What requests happened on date X during hour Y?"* Limits partition sizes to < 100MB. |
+| **`logs_by_ip`** | `(ip_address, log_date)` | `event_time DESC, log_id ASC` | *"Show all activity performed by a specific client IP address on date X."* |
+| **`logs_by_status`** | `(log_date, status_code)` | `event_time DESC, log_id ASC` | *"Retrieve all 500 server errors or 404 not found events for date X."* |
+| **`url_daily_counts`** | `(log_date)` | `url_path, status_code` | *"How many total hits did /cart/add receive today?"* Uses Cassandra **atomic counters**. |
+| **`slow_requests_by_date`** | `(log_date, hour_bucket)` | `response_time_ms DESC, event_time DESC, log_id ASC` | *"Which requests exceeded 500ms, ranked from slowest to fastest?"* |
 
 ---
 
-## 7. Step-by-Step Installation & Setup
+## 🚀 How to Run the Project
 
-### Environment Prerequisites
-- **Host OS**: Windows 11
-- **Linux Subsystem**: Ubuntu 24.04 LTS via WSL2
-- **Java**: OpenJDK 11 (`/usr/lib/jvm/java-11-openjdk-amd64`)
-- **Cassandra**: Apache Cassandra 4.1.12
-- **Python**: Python 3.10+ (tested on Python 3.13)
-
----
-
-### Step 7.1: Verify Java 11 in Ubuntu WSL2
-Inside your Ubuntu terminal, verify OpenJDK 11:
-```bash
-# Terminal: Ubuntu WSL2
-/usr/lib/jvm/java-11-openjdk-amd64/bin/java -version
-```
-Expected output:
-```text
-openjdk version "11.0.32.1"
-```
-
----
-
-### Step 7.2: Download & Extract Apache Cassandra 4.1.12 (WSL2)
-If not already downloaded, extract Apache Cassandra 4.1.12 to your home directory:
-```bash
-# Terminal: Ubuntu WSL2
-cd ~
-curl -fSL https://dlcdn.apache.org/cassandra/4.1.12/apache-cassandra-4.1.12-bin.tar.gz -o cassandra-4.1.12.tar.gz
-tar -xzf cassandra-4.1.12.tar.gz
-```
-
----
-
-### Step 7.3: Start Apache Cassandra in WSL2
-Launch Cassandra as a background daemon:
+### Step 1: Start Apache Cassandra (Ubuntu WSL2)
+Open your **Ubuntu 24.04 terminal** in WSL2 and run:
 ```bash
 # Terminal: Ubuntu WSL2
 export JAVA_HOME=/usr/lib/jvm/java-11-openjdk-amd64
 ~/apache-cassandra-4.1.12/bin/cassandra
-```
-Verify that Cassandra has joined the ring (status `UN` = Up/Normal):
-```bash
-# Terminal: Ubuntu WSL2
-export JAVA_HOME=/usr/lib/jvm/java-11-openjdk-amd64
+
+# Verify node status (Wait 15-20 seconds for JVM startup):
 ~/apache-cassandra-4.1.12/bin/nodetool status
 ```
-Expected output:
-```text
-Datacenter: datacenter1
-=======================
-Status=Up/Down
-|/ State=Normal/Leaving/Joining/Moving
---  Address    Load        Tokens  Owns (effective)  Host ID                               Rack
-UN  127.0.0.1  120.37 KiB  16      100.0%            40f96e13-15d0-4b9d-a714-4c1d8e11d2ea  rack1
-```
-
-> **Note**: WSL2 automatically mirrors `localhost:9042` to your Windows host. Python running on Windows can connect directly to `127.0.0.1:9042`.
+*Expected status*: `UN  127.0.0.1` (`U` = Up, `N` = Normal).
 
 ---
 
-### Step 7.4: Python Setup (Windows or WSL2)
-
-#### Option A: Running from Windows (PowerShell or Command Prompt)
+### Step 2: Install Python Dependencies (Windows)
+Open **Windows PowerShell** or **Command Prompt**:
 ```powershell
 # Terminal: Windows PowerShell
 cd "C:\Users\shiva\Downloads\BIG DATA PROJECT\Real-Time-Website-Log-Analytics"
 python -m pip install -r requirements.txt
 ```
 
-#### Option B: Running from Ubuntu WSL2
-```bash
-# Terminal: Ubuntu WSL2
-cd "/mnt/c/Users/shiva/Downloads/BIG DATA PROJECT/Real-Time-Website-Log-Analytics"
-bash setup.sh
-```
-
 ---
 
-## 8. Seeding Sample Data & Running the Application
-
-### Step 8.1: Seed 5,000 Sample Records
-To populate Cassandra with the initial 5,000 synthetic website logs:
+### Step 3: Run Automated Test Suite
+Verify that all 14 unit and integration tests pass:
 ```powershell
 # Terminal: Windows PowerShell
-cd "C:\Users\shiva\Downloads\BIG DATA PROJECT\Real-Time-Website-Log-Analytics\src"
-python seed_data.py 5000
-```
-This script:
-1. Generates 5,000 realistic logs spanning the last 2 days.
-2. Injects synthetic anomalies (duplicates, invalid IPs, status codes).
-3. Executes Module 2 cleaning and logs valid vs. dropped counts.
-4. Concurrently writes to all 5 Cassandra tables using prepared statements.
-
----
-
-### Step 8.2: Launch the Streamlit Dashboard
-```powershell
-# Terminal: Windows PowerShell
-cd "C:\Users\shiva\Downloads\BIG DATA PROJECT\Real-Time-Website-Log-Analytics"
-streamlit run src/dashboard.py
-```
-Open your web browser and navigate to:
-```text
-http://localhost:8501
-```
-
----
-
-## 9. Dashboard Pages Guide
-
-The dashboard is organized into 10 structured pages:
-
-1. **1. Overview**: High-level executive KPI cards (Total Requests, Unique IPs, Average Response Time, Success Rate, Slow Requests) with Hourly Traffic trend and HTTP Status Distribution charts.
-2. **2. Live Log Monitoring**: Live stream table displaying incoming requests (Timestamp, Method, Status, Latency, URL, IP). Includes search filters and auto-refresh controls.
-3. **3. Traffic Analytics**: Detailed temporal traffic analysis featuring a 24-hour bar chart, HTTP method distribution, and top requested URL endpoints.
-4. **4. Error Analytics**: In-depth triage of 4xx client errors and 5xx server failures, error frequency bar charts, and ranking of the most problematic endpoints.
-5. **5. Performance Analytics**: Latency statistics (Mean, Median, P95, Max) and a Seaborn-rendered latency distribution histogram with a 500ms slow threshold indicator.
-6. **6. Slow Request Investigation**: Dedicated query view against `slow_requests_by_date` displaying requests ordered by `response_time_ms DESC`.
-7. **7. IP Analysis**: Client IP address frequency table and an interactive dropdown allowing forensic log inspection for any selected IP.
-8. **8. Database Information**: Live Cassandra cluster metadata (Cluster Name, Release Version, Keyspace, Host ID) and an interactive **CQL Execution Sandbox**.
-9. **9. Data Generation & Control**: Interactive control panel to generate additional batches of logs (1,000 to 25,000), run preprocessing, and monitor insertion with a real-time progress bar.
-10. **10. Project Information & Viva Prep**: Comprehensive academic defense guide covering system architecture, Big Data principles, Cassandra trade-offs, and typical professor examination questions.
-
----
-
-## 10. Automated Testing
-
-Run the automated test suite with pytest:
-```powershell
-# Terminal: Windows PowerShell
-cd "C:\Users\shiva\Downloads\BIG DATA PROJECT\Real-Time-Website-Log-Analytics"
 python -m pytest -v
 ```
-
-All 14 automated unit and integration tests pass:
+Output:
 ```text
 tests/test_analytics_engine.py::test_compute_overview_metrics PASSED      [  7%]
 tests/test_analytics_engine.py::test_hourly_traffic_aggregation PASSED    [ 14%]
@@ -288,45 +179,61 @@ tests/test_preprocessor.py::test_missing_values_detection PASSED          [ 78%]
 tests/test_preprocessor.py::test_status_code_validation PASSED            [ 85%]
 tests/test_preprocessor.py::test_negative_response_time_validation PASSED  [ 92%]
 tests/test_preprocessor.py::test_duplicate_detection PASSED               [100%]
-============================== 14 passed in 9.43s ==============================
+============================== 14 passed in 2.93s ==============================
 ```
 
 ---
 
-## 11. Common Errors and Solutions
-
-### 1. `nodetool: Failed to connect to '127.0.0.1:7199' - Connection refused`
-- **Cause**: Cassandra is still initializing the JVM or is not running.
-- **Solution**: Cassandra takes 15–25 seconds to start. Wait 20 seconds, or check logs with: `tail -n 30 ~/apache-cassandra-4.1.12/logs/system.log`.
-
-### 2. `Unable to import asyncore module` (Python 3.12+)
-- **Cause**: Python 3.12 removed the legacy `asyncore` module from standard library.
-- **Solution**: Install `pyasyncore` (`pip install pyasyncore`). The project's `cassandra_manager.py` automatically injects this polyfill.
-
-### 3. Port 9042 Connection Refused from Windows
-- **Cause**: Cassandra is not started in WSL2, or is bound to a non-loopback IP.
-- **Solution**: Confirm Cassandra is running in Ubuntu WSL (`ps aux | grep cassandra`). WSL2 mirrors `127.0.0.1` to Windows automatically.
+### Step 4: Seed Database with Initial Amazon Weblogs
+Populate Cassandra with 5,000 realistic records:
+```powershell
+# Terminal: Windows PowerShell
+cd src
+python seed_data.py 5000
+cd ..
+```
 
 ---
 
-## 12. College Project Demonstration Script (Viva Walkthrough)
+### Step 5: Launch the Streamlit Dashboard
+```powershell
+# Terminal: Windows PowerShell
+streamlit run src/dashboard.py
+```
+Open your web browser at:
+👉 **`http://localhost:8501`**
 
-When presenting this project to your professor or evaluator:
+---
 
-1. **Step 1: Show Cassandra Running in WSL2**
-   - Open your Ubuntu terminal.
-   - Run: `~/apache-cassandra-4.1.12/bin/nodetool status`
-   - Point out `UN 127.0.0.1` and explain: *"Cassandra is running as a single-node cluster with status Up/Normal on port 9042."*
+## 📊 Dashboard Pages Overview
 
-2. **Step 2: Show the Automated Test Suite**
-   - Run: `python -m pytest -v`
-   - Point out that all 14 tests pass, including data validation, latency percentiles, and live Cassandra integration.
+| Page # | Page Title | Description & Visualizations |
+| :---: | :--- | :--- |
+| **1** | **Overview** | Top KPI cards (Total Requests, Unique IPs, Average Response Time, Success Rate, Slow Requests) and 24-Hour Traffic Trend chart. |
+| **2** | **Live Log Monitoring** | Real-time tabular stream of web requests with filters for HTTP status code, method, and endpoint. |
+| **3** | **Traffic Analytics** | Temporal hourly traffic distribution, HTTP method breakdown (GET vs POST), and Top 10 most visited Amazon URLs. |
+| **4** | **Error Analytics** | 4xx client errors and 5xx server faults breakdown, error rates by hour, and identification of failing endpoints. |
+| **5** | **Performance Analytics** | Latency metrics (Mean, Median, P95, Max) and Seaborn distribution histogram showing the 500ms threshold. |
+| **6** | **Slow Request Investigation** | Dedicated triage view pulling directly from `slow_requests_by_date` ordered by `response_time_ms DESC`. |
+| **7** | **IP Analysis** | Top client IP addresses by request volume and forensic history lookup for any selected visitor IP. |
+| **8** | **Database Information** | Real-time Apache Cassandra metadata, cluster version, keyspace topology, and an interactive **Live CQL Execution Sandbox**. |
+| **9** | **Data Generation & Control** | Ingest on-demand batches of 1,000 to 25,000 logs into Cassandra with live progress tracking. |
+| **10** | **Project Information & Viva Prep** | Academic defense guide, architectural breakdown, and professor viva answers. |
 
-3. **Step 3: Open the Streamlit Dashboard**
-   - Run: `streamlit run src/dashboard.py`
-   - Show **Page 1 (Overview)**: Explain the KPIs (Total Requests, Success Rate, Average Latency, P95).
-   - Show **Page 5 (Performance Analytics)**: Explain the difference between Median (P50) and P95 latency.
-   - Show **Page 6 (Slow Request Investigation)**: Explain how Cassandra's clustering key `response_time_ms DESC` retrieves slow bottlenecks without sorting in Python memory.
-   - Show **Page 8 (Database Information)**: Execute a live CQL query in the interactive sandbox (e.g. `SELECT * FROM url_daily_counts LIMIT 5`).
-   - Show **Page 9 (Data Generation & Control)**: Generate an additional 1,000 records on the spot to demonstrate the real-time ingestion pipeline.
+---
 
+## 🎓 College Viva & Evaluation Q&A Cheat Sheet
+
+### Q1: Why use Apache Cassandra instead of MySQL or MongoDB for weblogs?
+> **Answer**: High-traffic platforms generate millions of write operations per second. Traditional RDBMS databases write synchronously to B-Trees and apply table-level or row-level ACID locks, causing severe disk bottlenecks. MongoDB relies on document locking and memory caching. Cassandra uses a **Log-Structured Merge (LSM) Tree** architecture: writes are appended sequentially to an append-only **CommitLog** on disk and stored in RAM (**Memtable**). Once full, Memtables flush sequentially to disk as immutable **SSTables**. This provides ultra-fast $O(1)$ write speeds and horizontal scalability without locking.
+
+### Q2: What is the significance of P95 latency versus Average (Mean) latency?
+> **Answer**: Average latency hides performance degradation because a few fast requests can mask severe bottlenecks. **P95 Latency** means 95% of users experienced a response time at or below this value, while the slowest 5% experienced higher. In e-commerce (e.g., Amazon), the slowest 5% are often the high-value checkout or payment transactions, making P95 the industry standard SLA metric.
+
+### Q3: Why is `ALLOW FILTERING` discouraged in Cassandra?
+> **Answer**: In Cassandra, data is partitioned across cluster nodes based on the hash of the Partition Key. If a query does not specify the partition key and uses `ALLOW FILTERING`, Cassandra is forced to perform a full-cluster scan across every single partition on every node. This creates massive CPU spikes and network latency. Our project avoids `ALLOW FILTERING` by designing 5 specialized tables tailored to specific query patterns.
+
+---
+
+## 📄 License
+This project is developed for educational and academic evaluation purposes under the MIT License.
